@@ -11,6 +11,7 @@
 >  pip install pyinstaller
 >  pyinstaller --onefile {path/to/file/}  
 > ```
+> Debe compilarse el archivo 'interfazGrafica.py' !! 
 
 ## Funcionamiento
 
