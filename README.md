@@ -9,7 +9,7 @@
 > Si quiere armar un archivo .exe, debe instalar 'pyinstaller' con el siguiente comando:
 > ```bash
 >  pip install pyinstaller
->  pyinstaller --onefile {path/to/file/}  
+>  pyinstaller --noconsole --onefile {path/to/file/}  
 > ```
 > Debe compilarse el archivo 'interfazGrafica.py' !! 
 
