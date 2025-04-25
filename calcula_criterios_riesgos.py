@@ -30,17 +30,21 @@ def devolver_valor_accion_maximax(matriz, nombreFilas):
 # para el criterio de Hurwicz tengo una funcion
 # Hi = ωMAX + (1 - ω)MIN
 # ω se establece arbitrariamente al cargar el archivo
-def criterio_hurwicz(matriz, omega):
+def criterio_hurwicz(matriz, omega, nombreFilas):
+    vectorHurwicz = []
     # Calculo los minimos y maximos
     minimo = np.min(matriz, 1)
     maximo = np.max(matriz, 1)
     funcion = (omega*maximo) + ((1-omega)*minimo)
+    vectorHurwicz = funcion.tolist()
+    
     
     # y de esa funcion saco el maximo
-    return np.max(funcion)
+    return np.max(funcion), nombreFilas[np.argmax(vectorHurwicz)]
 
 def devolver_alternativa_hurwicz(matriz, nombreFilas):
     indice = np.argmax(np.max(matriz, 1))
+    vectorHurwicz = criterio_hurwicz(matriz, )
     if nombreFilas is not None:
         return nombreFilas[indice]
     return indice
@@ -145,8 +149,8 @@ def mostrar_criterios(matriz, omega, filas, columnas, nombreColumnas, nombreFila
     print(f"Mejor alternativa: {accion} --> {valor}")
     
     print("Criterio de Hurwicz: ")
-    valor = criterio_hurwicz(matriz_sin_probabilidades, omega)
-    accion = devolver_alternativa_hurwicz(matriz_sin_probabilidades, nombreFilas)
+    valor, accion = criterio_hurwicz(matriz_sin_probabilidades, omega, nombreFilas)
+    # accion = devolver_alternativa_hurwicz(matriz_sin_probabilidades, nombreFilas)
     print(f'Mejor alternativa: {accion} --> {valor}')
     
     print("Criterio de Savage: ")

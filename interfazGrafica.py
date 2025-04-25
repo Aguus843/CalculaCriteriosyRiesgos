@@ -102,8 +102,8 @@ class InterfazDecision:
         optim_val = criterio_optimista(matriz_sin_prob)
         optim_alt = devolver_valor_accion_maximax(matriz_sin_prob, filas)
 
-        hurwicz_val = criterio_hurwicz(matriz_sin_prob, omega)
-        hurwicz_alt = devolver_alternativa_hurwicz(matriz_sin_prob, filas)
+        hurwicz_val, hurwicz_alt = criterio_hurwicz(matriz_sin_prob, omega, filas)
+        # hurwicz_alt = devolver_alternativa_hurwicz(matriz_sin_prob, filas)
 
         savage_val = criterio_savage(matriz_sin_prob)
         savage_alt = devolver_alternativa_arrepentimiento(matriz_sin_prob, columnas, filas, m)
