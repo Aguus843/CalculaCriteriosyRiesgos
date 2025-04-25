@@ -44,7 +44,7 @@ def criterio_hurwicz(matriz, omega, nombreFilas):
 
 def devolver_alternativa_hurwicz(matriz, nombreFilas):
     indice = np.argmax(np.max(matriz, 1))
-    vectorHurwicz = criterio_hurwicz(matriz, )
+    
     if nombreFilas is not None:
         return nombreFilas[indice]
     return indice
