@@ -6,7 +6,7 @@ from calcula_criterios_riesgos import *
 class InterfazDecision:
     def __init__(self, root):
         self.root = root
-        self.root.title("Calculadora de Criterios de Decisión")
+        self.root.title("Calculadora de Criterios de Decisión :: Agustin Weisbek")
 
         self.resultados_labels = {}
         self.root.geometry("1100x800")
