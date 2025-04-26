@@ -42,8 +42,15 @@ class InterfazDecision:
         self.vals_text = scrolledtext.ScrolledText(top_frame, height=4)
         self.vals_text.grid(row=len(campos), column=1, sticky="ew")
 
-        tk.Button(top_frame, text="Calcular", command=self.calcular).grid(row=len(campos)+1, column=0, columnspan=2, pady=5)
+        # tk.Button(top_frame, text="Calcular", command=self.calcular).grid(row=len(campos)+1, column=0, columnspan=2, pady=5)
 
+        # Agrego el botón para limpiar la interfaz
+        btn_frame = tk.Frame(top_frame)
+        btn_frame.grid(row=len(campos)+1, column=0, columnspan=2, pady=5)
+
+        tk.Button(btn_frame, text="Calcular Decisiones", command=self.calcular).pack(side="left", padx=5)
+        tk.Button(btn_frame, text="Limpiar", command=self.limpiar).pack(side="left", padx=5)
+        
         # ======== FRAME CENTRAL: Matriz cargada =========
         self.matriz_frame = tk.LabelFrame(self.root, text="Matriz Ingresada")
         self.matriz_frame.grid(row=1, column=0, sticky="nsew", padx=10)
@@ -77,6 +84,34 @@ class InterfazDecision:
 
         self.tree_esperanza = None
         self.tree_arrep = None
+        
+    def limpiar(self):
+        # Limpiar entradas
+        self.alt_entry.delete(0, tk.END)
+        self.est_entry.delete(0, tk.END)
+        self.prob_entry.delete(0, tk.END)
+        self.cols_entry.delete(0, tk.END)
+        self.rows_entry.delete(0, tk.END)
+        self.omega_entry.delete(0, tk.END)
+        self.vals_text.delete("1.0", tk.END)
+    
+        # Limpiar matriz cargada
+        for item in self.tree.get_children():
+            self.tree.delete(item)
+    
+        # Limpiar resultados
+        for label in self.resultados_labels.values():
+            label.config(text=label.cget("text").split(":")[0] + ": ")
+    
+        # Limpiar matrices de esperanza y arrepentimiento
+        if self.tree_esperanza is not None:
+            for item in self.tree_esperanza.get_children():
+                self.tree_esperanza.delete(item)
+        
+        if self.tree_arrep is not None:
+            for item in self.tree_arrep.get_children():
+                self.tree_arrep.delete(item)
+
 
     def crear_resultados_labels(self):
         etiquetas = [
