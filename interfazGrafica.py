@@ -86,6 +86,12 @@ class InterfazDecision:
         self.tree_arrep = None
         
     def limpiar(self):
+        respuesta = messagebox.askyesno("CONFIRMACION", "Estás seguro que querés limpiar todo?")
+        # respuesta = messagebox.askquestion("CONFIRMACION", "Estás seguro que querés limpiar todo?")
+        # Si se apreta 'no', no se hace nada
+        if not respuesta:
+            return  
+
         # Limpiar entradas
         self.alt_entry.delete(0, tk.END)
         self.est_entry.delete(0, tk.END)
@@ -94,23 +100,25 @@ class InterfazDecision:
         self.rows_entry.delete(0, tk.END)
         self.omega_entry.delete(0, tk.END)
         self.vals_text.delete("1.0", tk.END)
-    
+
         # Limpiar matriz cargada
         for item in self.tree.get_children():
             self.tree.delete(item)
-    
+
         # Limpiar resultados
         for label in self.resultados_labels.values():
             label.config(text=label.cget("text").split(":")[0] + ": ")
-    
-        # Limpiar matrices de esperanza y arrepentimiento
+
+        # Limpiar matriz de esperanza
         if self.tree_esperanza is not None:
-            for item in self.tree_esperanza.get_children():
-                self.tree_esperanza.delete(item)
-        
+            self.tree_esperanza.destroy()
+            self.tree_esperanza = None
+
+        # Limpiar matriz de arrepentimiento
         if self.tree_arrep is not None:
-            for item in self.tree_arrep.get_children():
-                self.tree_arrep.delete(item)
+            self.tree_arrep.destroy()
+            self.tree_arrep = None
+
 
 
     def crear_resultados_labels(self):
@@ -233,7 +241,6 @@ class InterfazDecision:
 
         except Exception as e:
             messagebox.showerror("Error", str(e))
-
 if __name__ == "__main__":
     root = tk.Tk()
     app = InterfazDecision(root)
